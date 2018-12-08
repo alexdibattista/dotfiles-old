@@ -4,7 +4,7 @@ function ...   ; cd ../.. ; end
 function ....  ; cd ../../.. ; end
 function ..... ; cd ../../../.. ; end
 function ll    ; tree --dirsfirst -ChFupDaLg 1 $argv ; end
-
+alias vtop="vtop --theme acid"
 
 # tabtab source for serverless package
 # uninstall by removing these lines or running `tabtab uninstall serverless`

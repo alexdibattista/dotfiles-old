@@ -17,14 +17,13 @@ let g:colors_name = "alx"
 " Gvim Highlighting: (see :help highlight-groups)"{{{
 " ---------------------------------------------------------------------
 " First, the Normal
-hi Normal        guifg=#e5e5e5 guibg=#0D1926 gui=NONE
+hi Normal        guifg=#b4e1fd guibg=#0d1926 gui=NONE
 " ---------------------------------------------------------------------
 " The Languages stuff
 hi Title         guifg=#c9f0fa guibg=NONE    gui=NONE
 " ---------------------------------------------------------------------
 hi Comment       guifg=#616161 guibg=NONE    gui=NONE
 " ---------------------------------------------------------------------
-" hi Constant      guifg=#e3588d guibg=NONE    gui=NONE
 hi Constant      guifg=#fff159 guibg=NONE    gui=NONE
 hi String        guifg=#60bdf4 guibg=NONE    gui=NONE
 hi Character     guifg=#ff8da1 guibg=NONE    gui=NONE
@@ -85,11 +84,11 @@ hi TODO          guifg=#ff0087 guibg=#ffff87 gui=NONE
 hi NonText       guifg=#838383 guibg=NONE    gui=NONE
 hi Visual        guifg=#262626 guibg=#ffff4d gui=NONE
 hi ErrorMsg      guifg=#870000 guibg=#ffa40b gui=NONE
-hi IncSearch     guifg=#262626 guibg=#ff9933 gui=NONE
+hi IncSearch     guifg=#262626 guibg=#ffff4d gui=NONE
 hi Search        guifg=#262626 guibg=#ff9933 gui=NONE
 hi MoreMsg       guifg=#616161 guibg=NONE    gui=NONE
 hi ModeMsg       guifg=#616161 guibg=NONE    gui=NONE
-hi LineNr        guifg=#838383 guibg=NONE    gui=NONE
+hi LineNr        guifg=#838383 guibg=#3f3f3f gui=NONE
 hi VertSplit     guifg=#212121 guibg=#474747 gui=NONE
 hi VisualNOS     guifg=#262626 guibg=#ffff4d gui=NONE
 "hi Folded        guifg=#2e4545 guibg=#1e2d2d gui=NONE
@@ -138,19 +137,17 @@ hi SignColumn    guifg=NONE    guibg=#212121 gui=NONE
 " on more awesome, and fun to work with !)
 " ---------------------------------------------------------------------
 " Python Specifics
-"hi pythonDot        guifg=#00ffa5 guibg=NONE gui=NONE
-"hi pythonDot        guifg=#ffff31 guibg=NONE gui=NONE
-"hi pythonDot        guifg=#ff0800 guibg=NONE gui=NONE
 hi pythonDot                 guifg=#d70a53 guibg=NONE gui=NONE
 hi pythonParameters          guifg=#bada55 guibg=NONE gui=NONE
 hi pythonClassParameters     guifg=#bada55 guibg=NONE gui=NONE
 hi pythonClass               guifg=#00bcbc guibg=NONE gui=NONE
-"
+hi pythonImport              guifg=#1eff8e guibg=NONE gui=NONE
+hi pythonFunction            guifg=#1eff8e guibg=NONE gui=NONE
+
+
 " ---------------------------------------------------------------------
 "  Ruby Specifics
 hi rubyInterpolation      guifg=#ff4040 guibg=NONE gui=NONE
-"hi rubyMethodBlock        guifg=#ff8da1 guibg=NONE gui=NONE
-"hi rubyMethodBlock        guifg=#8ddaff guibg=NONE gui=NONE
 hi rubyMethodBlock        guifg=#ffb28d guibg=NONE gui=NONE
 hi rubyCurlyBlock         guifg=#f64a8a guibg=NONE gui=NONE
 hi rubyDoBlock            guifg=#f64a8a guibg=NONE gui=NONE
@@ -164,23 +161,6 @@ hi rubyArrayDelimiter     guifg=#00bcbc guibg=NONE gui=NONE
 " ---------------------------------------------------------------------
 " These are extra parts for highlighting certain external plugins
 " ---------------------------------------------------------------------
-"
-" Startify (https://github.com/mhinz/vim-startify)
-"
-hi StartifyBracket  guifg=#b06bfc guibg=NONE gui=NONE
-hi StartifyNumber   guifg=#bada55 guibg=NONE gui=NONE
-hi StartifySpecial  guifg=#2e8857 guibg=NONE gui=NONE
-hi StartifyPath     guifg=#545454 guibg=NONE gui=NONE
-hi StartifySlash    guifg=#474747 guibg=NONE gui=NONE
-" hi StartifyFile     guifg=#00ffa5 guibg=NONE gui=NONE
-" hi StartifyFile     guifg=#2aa198 guibg=NONE gui=NONE
-" hi StartifyFile     guifg=#f0e68c guibg=NONE gui=NONE
-hi StartifyFile     guifg=#fa8072 guibg=NONE gui=NONE
-hi StartifyHeader   guifg=#f0e68c guibg=NONE gui=NONE
-hi StartifyFooter   guifg=#a0522d guibg=NONE gui=NONE
-"
-" ---------------------------------------------------------------------
-"
 " Signify (https://github.com/mhinz/vim-signify)
 "
 hi SignifySignAdd    guifg=#00ff00 guibg=#212121 gui=NONE

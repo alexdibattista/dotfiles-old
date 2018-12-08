@@ -3,14 +3,24 @@ set encoding=UTF-8
 
 " set spell check
 set nospell
-syntax enable
+syntax on
 if exists('+termguicolors')
   let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
   let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
   set termguicolors
 endif
 set background=dark
-colorscheme luna
+colorscheme onedark
+
+" Syntastic
+" set statusline+=%#warningmsg#
+" set statusline+=%{SyntasticStatuslineFlag()}
+" set statusline+=%*
+" let g:syntastic_python_checkers = ['pycodestyle']
+" let g:syntastic_always_populate_loc_list = 1
+" let g:syntastic_auto_loc_list = 1
+" let g:syntastic_check_on_open = 1
+" let g:syntastic_check_on_wq = 0
 
 " Local directories {{{
 set backupdir=~/.config/nvim/backups
@@ -51,8 +61,8 @@ set completeopt-=preview
 
 let g:python_host_prog = '/Users/alexanderdibattista/.pyenv/versions/neovim2/bin/python'
 let g:python3_host_prog = '/Users/alexanderdibattista/.pyenv/versions/neovim3/bin/python'
-
-autocmd FileType python nnoremap <leader>y :0,$!yapf<Cr>
+let g:python_highlight_all = 1
+" autocmd FileType python nnoremap <leader>y :0,$!yapf<Cr>
 
 " remove whitespace on save
 autocmd BufWritePre * %s/\s\+$//e
@@ -80,22 +90,25 @@ nnoremap <silent> <leader>c :set nolist!<CR>
 " ale
 
 let g:ale_virtualenv_dir_names = ['venv', '.env', 'env', 've', 'virtualenv', '.pyenv']
-let g:ale_python_pylint_options = "--init-hook='import sys; sys.path.append(\".\")'"
+" let g:ale_python_pylint_options = "--init-hook='import sys; sys.path.append(\".\")'"
 let g:ale_linters = {
       \  'javascript': ['eslint'],
-      \  'python': ['pycodestyle', 'flake8', 'pylint'] }
+      \  'python': ['pycodestyle'] }
 let g:ale_fixers = {}
 let g:ale_fixers = {
-      \  'javascript': ['eslint'],
-      \  'python': ['black', 'yapf', 'autopep8'] }
+      \  'javascript': ['eslint']}
+      " \  'python': ['black'] }
 let g:ale_lint_on_text_changed = 'never'
 let g:ale_lint_on_enter = 1
-let g:ale_fix_on_save = 1
+let g:ale_fix_on_save = 0
 
 " TODO: create a switch for python 2
 let g:ale_python_pycodestyle_executable = "/Users/alexanderdibattista/.pyenv/versions/neovim3/bin/pycodestyle"
-let g:ale_python_flake8_executable = "/Users/alexanderdibattista/.pyenv/versions/neovim3/bin/flake8"
-let g:ale_python_pylint_executable = "/Users/alexanderdibattista/.pyenv/versions/neovim3/bin/flake8"
+let g:ale_python_black_executable = "/Users/alexanderdibattista/.pyenv/versions/neovim3/bin/black"
+let g:black_fast = 1
+let g:black_linelength = 79
+let g:black_virtualenv = "/Users/alexanderdibattista/.pyenv/versions/neovim3/bin/black"
+autocmd BufWritePre *.py execute ':Black'
 
 " Airline.vim {{{
   let g:airline_theme='luna'
@@ -132,7 +145,6 @@ augroup END
 " add WIP to git {{{
   map <Leader>gw :!git add .; git commit -m 'WIP'; git push<cr>
 " }}}
-  " call neomake#configure#automake('w')
 "Relative numbers {{{
   set relativenumber " Use relative line numbers. Current line is still in status bar.
   au BufReadPost,BufNewFile * set relativenumber
@@ -321,13 +333,13 @@ call plug#begin('~/.config/nvim/plugged')
     \ 'branch': 'next',
     \ 'do': 'bash install.sh',
     \ }
-  Plug 'neomake/neomake'
   Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
   Plug 'majutsushi/tagbar'
   Plug 'tpope/vim-obsession'
   Plug 'w0rp/ale'
   Plug 'roxma/nvim-yarp'
   Plug 'sheerun/vim-polyglot'
+  " Plug 'vim-syntastic/syntastic'
 
   " Themes
   Plug 'vim-airline/vim-airline'
@@ -367,11 +379,14 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'jparise/vim-graphql'
   Plug 'carlitux/deoplete-ternjs', { 'do': 'npm install -g tern' }
   Plug 'zchee/deoplete-jedi'
+  Plug 'posva/vim-vue'
 
   " Python
   Plug 'lambdalisue/vim-pyenv'
   Plug 'lepture/vim-jinja'
   Plug 'plytophogy/vim-virtualenv'
+  Plug 'vim-python/python-syntax'
+  Plug 'ambv/black'
 
   " GO
   Plug 'zchee/deoplete-go'
@@ -421,3 +436,4 @@ call plug#end()
 
 
 call deoplete#custom#source('ultisnips', 'matchers', ['matcher_fuzzy'])
+

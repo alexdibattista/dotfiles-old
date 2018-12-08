@@ -1,1 +1,1 @@
-/Users/alexanderdibattista/.config/omf/themes/alx/fish_prompt.fish
+/Users/alexanderdibattista/.local/share/omf/themes/clearance/fish_prompt.fish
