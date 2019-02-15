@@ -9,18 +9,11 @@ if exists('+termguicolors')
   let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
   set termguicolors
 endif
-set background=dark
-colorscheme onedark
 
-" Syntastic
-" set statusline+=%#warningmsg#
-" set statusline+=%{SyntasticStatuslineFlag()}
-" set statusline+=%*
-" let g:syntastic_python_checkers = ['pycodestyle']
-" let g:syntastic_always_populate_loc_list = 1
-" let g:syntastic_auto_loc_list = 1
-" let g:syntastic_check_on_open = 1
-" let g:syntastic_check_on_wq = 0
+colorscheme onedark
+" autocmd FileType python colorscheme railcasts
+
+let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 
 " Local directories {{{
 set backupdir=~/.config/nvim/backups
@@ -29,49 +22,82 @@ set undodir=~/.config/nvim/undo
 " }}}
 
 let mapleader="," " Map leader
-set nu " Enable line numbers
-set ruler
+
+set clipboard=unnamedplus
+set cursorline " Highlight current line
+set diffopt=filler " Add vertical spaces to keep right and left aligned
+set diffopt+=iwhite " Ignore whitespace changes (focus on code changes)
+set encoding=utf-8 nobomb " BOM often causes trouble
+set expandtab " Expand tabs to spaces
+set formatoptions=
+set formatoptions+=c " Format comments
+set formatoptions+=r " Continue comments by default
+set formatoptions+=o " Make comment when using o or O from comment line
+set formatoptions+=q " Format comments with gq
+set formatoptions+=n " Recognize numbered lists
+set formatoptions+=2 " Use indent from 2nd line of a paragraph
+set formatoptions+=l " Don't break lines that are already long
+set formatoptions+=1 " Break before 1-letter words
+set hidden " when a buffer is brought to foreground, remember undo history and marks
+set ignorecase " Ignore case of searches
+set list!
 set mouse=a " Enable the mouse
 set noerrorbells " Disable error bells
-set termguicolors " Enable true color support
-set title " Show the filename in the window title bar
-set showtabline=2 " Always show tab bar
-set expandtab " Expand tabs to spaces
-set softtabstop=2 " Tab key results in 2 spaces
-set shiftwidth=2 " The # of spaces for indenting
-set hidden " when a buffer is brought to foreground, remember undo history and marks
-set list!
-set viminfo=%,'9999,s512 " Restore buffer list, marks are remembered for 9999 files, registers up to 512Kb are remembered
-set clipboard=unnamed
-set nofoldenable
-set noshowmode
+" set nofoldenable
+set noshowmode " Don't show the current mode (airline.vim takes care of us)
 set nostartofline " Don't reset cursor to start of line when moving around
 set nowrap " Do not wrap lines
-let g:AutoClosePumvisible = {"ENTER": "<C-Y>", "ESC": "<ESC>"}
-let g:deoplete#enable_at_startup = 1
+set nu " Enable line numbers
+set ofu=syntaxcomplete#Complete " Set omni-completion method
+set report=0 " Show all changes
+set ruler
+set showtabline=2 " Always show tab bar
+set softtabstop=2 " Tab key results in 2 spaces
+set shiftwidth=2 " The # of spaces for indenting
+set splitbelow " New window goes below
+set splitright " New windows goes right
+set suffixes=.bak,~,.swp,.swo,.o,.d,.info,.aux,.log,.dvi,.pdf,.bin,.bbl,.blg,.brf,.cb,.dmg,.exe,.ind,.idx,.ilg,.inx,.out,.toc,.pyc,.pyd,.dll
+set switchbuf=""
+set termguicolors " Enable true color support
+set title " Show the filename in the window title bar
+set undofile " Persistent Undo
+set viminfo=%,'9999,s512 " Restore buffer list, marks are remembered for 9999 files, registers up to 512Kb are remembered
+set visualbell
+set wildchar=<TAB> " Character for CLI expansion (TAB-completion)
+set wildignore+=.DS_Storeset wildignore+=*.jpg,*.jpeg,*.gif,*.png,*.gif,*.psd,*.o,*.obj,*.min.js
+set wildignore+=*/bower_components/*,*/node_modules/*
+set wildignore+=*/smarty/*,*/vendor/*,*/.git/*,*/.hg/*,*/.svn/*,*/.sass-cache/*,*/log/*,*/tmp/*,*/build/*,*/ckeditor/*,*/doc/*,*/source_maps/*,*/dist/*
+set winminheight=0 " Allow splits to be reduced to a single line
+
+let g:AutoClosePumvisible = {"ENTER": "<C-Y>", "ESC": "<ESC>"} " autoclose escape key
+
+let g:python_host_prog = '/Users/alexanderdibattista/.pyenv/versions/neovim2/bin/python'
+let g:python3_host_prog = '/Users/alexanderdibattista/.pyenv/versions/neovim3/bin/python'
+let g:python_highlight_all = 1
+
 let g:deoplete#sources#ternjs#tern_bin = '/usr/local/bin/ternjs'
 " Add extra filetypes
 let g:deoplete#sources#ternjs#filetypes = [
+                \ 'ts',
+                \ 'tsx',
                 \ 'jsx',
                 \ 'javascript.jsx',
                 \ 'vue']
 let g:deoplete#max_list = 200
 let g:deoplete#sources#rust#racer_binary='/Users/alexanderdibattista/.cargo/bin/racer'
-set completeopt-=preview
 
-let g:python_host_prog = '/Users/alexanderdibattista/.pyenv/versions/neovim2/bin/python'
-let g:python3_host_prog = '/Users/alexanderdibattista/.pyenv/versions/neovim3/bin/python'
-let g:python_highlight_all = 1
-" autocmd FileType python nnoremap <leader>y :0,$!yapf<Cr>
 
 " remove whitespace on save
 autocmd BufWritePre * %s/\s\+$//e
 
-autocmd FileType javascript let g:SuperTabDefaultCompletionType = "<c-x><c-o>"
-let g:UltiSnipsExpandTrigger="<C-j>"
+" let g:UltiSnipsExpandTrigger="<C-j>"
+" Trigger configuration.
+let g:UltiSnipsExpandTrigger='<leader>e'
+let g:UltiSnipsJumpForwardTrigger='<leader>r'
+let g:UltiSnipsJumpBackwardTrigger='<leader>w'
 inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 
-map <C-n> :NERDTreeToggle<CR>
+map <C-\> :NERDTreeToggle<CR>
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 let g:NERDTreeDirArrowExpandable = '▸'
 let g:NERDTreeDirArrowCollapsible = '▾'
@@ -86,33 +112,41 @@ set lcs=tab:›\ ,trail:·,eol:¬,nbsp:_
 set fcs=fold:-
 nnoremap <silent> <leader>c :set nolist!<CR>
 " }}}
-
 " ale
 
+let g:ale_completion_enabled = 1
 let g:ale_virtualenv_dir_names = ['venv', '.env', 'env', 've', 'virtualenv', '.pyenv']
-" let g:ale_python_pylint_options = "--init-hook='import sys; sys.path.append(\".\")'"
+let b:ale_linter_aliases = {'tsx': 'typescript'}
 let g:ale_linters = {
       \  'javascript': ['eslint'],
-      \  'python': ['pycodestyle'] }
+      \  'typescript': ['tsserver', 'eslint'],
+      \  'python': ['pycodestyle']}
 let g:ale_fixers = {}
 let g:ale_fixers = {
-      \  'javascript': ['eslint']}
-      " \  'python': ['black'] }
+      \  'javascript': ['prettier', 'eslint'],
+      \  'typescript': ['prettier', 'eslint'],
+      \  'json': ['prettier'],
+      \  'css': ['stylelint', 'prettier'],
+      \  'python': ['black']}
+
+
+let g:ale_sign_error = '⇝'
+let g:ale_sign_warning = '⚠'
 let g:ale_lint_on_text_changed = 'never'
 let g:ale_lint_on_enter = 1
-let g:ale_fix_on_save = 0
+let g:ale_fix_on_save = 1
 
 " TODO: create a switch for python 2
 let g:ale_python_pycodestyle_executable = "/Users/alexanderdibattista/.pyenv/versions/neovim3/bin/pycodestyle"
 let g:ale_python_black_executable = "/Users/alexanderdibattista/.pyenv/versions/neovim3/bin/black"
+
+" Black Python linter
 let g:black_fast = 1
 let g:black_linelength = 79
 let g:black_virtualenv = "/Users/alexanderdibattista/.pyenv/versions/neovim3/bin/black"
 autocmd BufWritePre *.py execute ':Black'
 
 " Airline.vim {{{
-  let g:airline_theme='luna'
-
 augroup airline_config
   autocmd!
   if !exists('g:airline_symbols')
@@ -145,10 +179,11 @@ augroup END
 " add WIP to git {{{
   map <Leader>gw :!git add .; git commit -m 'WIP'; git push<cr>
 " }}}
+
 "Relative numbers {{{
   set relativenumber " Use relative line numbers. Current line is still in status bar.
   au BufReadPost,BufNewFile * set relativenumber
-  " }}}
+" }}}
 
 " Strip trailing whitespace (,ss) {{{
 function! StripWhitespace () " {{{
@@ -160,6 +195,7 @@ function! StripWhitespace () " {{{
 endfunction " }}}
 noremap <leader>ss :call StripWhitespace ()<CR>
 " }}}
+
 " fzf {{{
 augroup fzf_config
   set rtp+=/usr/local/bin/fzf
@@ -205,20 +241,46 @@ augroup nerd_commenter
   let NERDCompactSexyComs=1
   let g:NERDCustomDelimiters = { 'racket': { 'left': ';', 'leftAlt': '#|', 'rightAlt': '|#' } }
 augroup END
-" }}}h
+" }}}
 
-" Buffer navigation (,,) (gb) (gB) (,ls) {{{
+" Buffers {{{
+augroup buffer_control
+  autocmd!
+
+  " Buffer navigation (,,) (gb) (gB) (,ls) {{{
   map <Leader>, <C-^>
   map <Leader>ls :buffers<CR>
   map gb :bnext<CR>
   map gB :bprev<CR>
-" }}}
-" Faster split resizing (+,-) {{{
-  if bufwinnr(1)
-    map + <C-W>+
-    map - <C-W>-
-  endif
   " }}}
+
+  " Jump to buffer number (<N>gb) {{{
+  let c = 1
+  while c <= 99
+    execute "nnoremap " . c . "gb :" . c . "b\<CR>"
+    let c += 1
+  endwhile
+  " }}}
+
+  " Close Quickfix window (,qq) {{{
+  map <leader>qq :cclose<CR>
+  " }}}
+
+  " Rename buffer (:Rename) {{{
+  function! s:RenameBuffer(name)
+    silent! execute 'saveas! ' . a:name
+    let l:old_buffer = bufnr("#")
+    let l:old_filename = expand("#:t")
+    let l:new_buffer = bufnr("%")
+    let l:new_filename = expand("%:t")
+    silent! execute '!rm ' . shellescape(expand("#"), 1)
+    silent! execute 'bd' l:old_buffer
+    echom 'Renamed `' . l:old_filename . '` to `' . l:new_filename . '`'
+  endfunction
+  command! -nargs=1 Rename call s:RenameBuffer(<f-args>)
+  " }}}
+augroup END
+" }}}
 
 " Silver Searcher {{{
 augroup ag_config
@@ -292,6 +354,24 @@ let g:tagbar_type_elixir = {
         \ 't:tests'
     \ ]
     \ }
+
+" jsx-pretty.vim {{{
+augroup jsx_pretty_config
+  autocmd!
+  let g:vim_jsx_pretty_colorful_config = 1
+augroup END
+" }}}
+
+" EasyAlign.vim {{{
+augroup easy_align_config
+  autocmd!
+  " Start interactive EasyAlign in visual mode (e.g. vip<Enter>)
+  vmap <Enter> <Plug>(EasyAlign)
+  " Start interactive EasyAlign for a motion/text object (e.g. <Leader>aip)
+  nmap <Leader>a <Plug>(EasyAlign)
+augroup END
+" }}}
+
 " vim-markdown[{{{
 let g:vim_markdown_folding_disabled = 1
 
@@ -315,20 +395,45 @@ endfunction
 let g:lexical#spelllang = ['en_us','en_ca',]
 "}}}
 
+" vim-repeat.vim {{{
+augroup repeat_config
+  autocmd!
+  nmap z <Plug>(RepeatUndo)
+  nmap gz <Plug>(RepeatUndoLine)
+  nmap Z <Plug>(RepeatRedo)
+augroup END
+" }}}
+
+" JavaScript {{{
+augroup filetype_javascript
+  autocmd!
+  let g:jsx_ext_required = 0
+  let g:javascript_plugin_jsdoc = 1
+augroup END
+" }}}
+
+" JSON {{{
+augroup filetype_json
+  autocmd!
+  au BufRead,BufNewFile *.json set ft=json syntax=javascript
+augroup END
+" }}}
+
 call plug#begin('~/.config/nvim/plugged')
   " Utilities
   Plug 'junegunn/rainbow_parentheses.vim'
+  Plug 'junegunn/vim-easy-align'
   Plug 'nathanaelkane/vim-indent-guides'
   Plug 'reedes/vim-wordy'
+  Plug 'scrooloose/nerdtree'
   Plug 'scrooloose/nerdcommenter'
   Plug 'Shougo/vimproc.vim',     { 'do' : 'make' }
-  Plug 'scrooloose/nerdtree'
   Plug 'tpope/vim-repeat'
   Plug 'tpope/vim-surround'
   Plug 'godlygeek/tabular'
   Plug 'Townk/vim-autoclose'
   Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-  Plug 'ervandew/supertab'
+  Plug 'Shougo/denite.nvim'
   Plug 'autozimu/LanguageClient-neovim', {
     \ 'branch': 'next',
     \ 'do': 'bash install.sh',
@@ -339,14 +444,12 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'w0rp/ale'
   Plug 'roxma/nvim-yarp'
   Plug 'sheerun/vim-polyglot'
-  " Plug 'vim-syntastic/syntastic'
+  Plug 'terryma/vim-multiple-cursors'
 
   " Themes
   Plug 'vim-airline/vim-airline'
-  Plug 'vim-airline/vim-airline-themes'
   Plug 'ryanoasis/vim-devicons'
   Plug 'gf3/molotov'
-  Plug 'arcticicestudio/nord-vim'
   Plug 'ajmwagar/vim-deus'
   Plug 'arcticicestudio/nord-vim'
 
@@ -371,15 +474,14 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'leafgarland/typescript-vim'
   Plug 'mxw/vim-jsx'
   Plug 'pangloss/vim-javascript'
-  Plug 'Quramy/tsuquyomi'
   Plug 'rking/ag.vim'
   Plug 'othree/yajs'
-  Plug 'HerringtonDarkholme/yats'
   Plug 'flowtype/vim-flow'
   Plug 'jparise/vim-graphql'
   Plug 'carlitux/deoplete-ternjs', { 'do': 'npm install -g tern' }
   Plug 'zchee/deoplete-jedi'
   Plug 'posva/vim-vue'
+  Plug 'maxmellon/vim-jsx-pretty', { 'for': [ 'javascript', 'javascript.jsx', 'typescript' ] }
 
   " Python
   Plug 'lambdalisue/vim-pyenv'
@@ -435,5 +537,6 @@ call plug#begin('~/.config/nvim/plugged')
 call plug#end()
 
 
+let g:deoplete#enable_at_startup = 1
 call deoplete#custom#source('ultisnips', 'matchers', ['matcher_fuzzy'])
 

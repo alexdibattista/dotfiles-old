@@ -1,10 +1,6 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =8
-let g:netrw_dirhist_1='/Users/alexanderdibattista/code/consenSys/RSVP/api'
-let g:netrw_dirhist_2='/Users/alexanderdibattista/code/consenSys/RSVP/api/app'
-let g:netrw_dirhist_3='/Users/alexanderdibattista/code/consenSys/RSVP/api/app/controllers'
-let g:netrw_dirhist_4='/Users/alexanderdibattista/code/consenSys/RSVP'
-let g:netrw_dirhist_5='scp://adibattista@lish-dalls.linode.com/'
-let g:netrw_dirhist_6='scp://adibattista@lish-dallas.linode.com/'
-let g:netrw_dirhist_7='rsync://adibattista@lish-dallas.linode.com:22/'
-let g:netrw_dirhist_8='rsync://ubuntu@ec2-18-191-146-180.us-east-2.compute.amazonaws.com/var/www/'
+let g:netrw_dirhist_cnt =4
+let g:netrw_dirhist_1='/Users/alexanderdibattista/code/play/typescript-webpack-react/build-utils'
+let g:netrw_dirhist_2='/Users/alexanderdibattista/code/play/typescript-webpack-react'
+let g:netrw_dirhist_3='/Users/alexanderdibattista/code/play/typescript-webpack-react/build-utils'
+let g:netrw_dirhist_4='/Users/alexanderdibattista/code/bridge7/Hugo'

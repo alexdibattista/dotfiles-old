@@ -1,0 +1,7 @@
+nvim/spell
+nvim/plugged
+nvim/swaps
+nvim/undo
+nvim/autoload/plug.vim
+yarn/
+qBittorrent/
