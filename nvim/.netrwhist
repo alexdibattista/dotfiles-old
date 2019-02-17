@@ -1,6 +1,8 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =4
+let g:netrw_dirhist_cnt =6
 let g:netrw_dirhist_1='/Users/alexanderdibattista/code/play/typescript-webpack-react/build-utils'
 let g:netrw_dirhist_2='/Users/alexanderdibattista/code/play/typescript-webpack-react'
 let g:netrw_dirhist_3='/Users/alexanderdibattista/code/play/typescript-webpack-react/build-utils'
 let g:netrw_dirhist_4='/Users/alexanderdibattista/code/bridge7/Hugo'
+let g:netrw_dirhist_5='/Users/alexanderdibattista/.config'
+let g:netrw_dirhist_6='/Users/alexanderdibattista/.config/nvim'

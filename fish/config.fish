@@ -41,6 +41,46 @@ function t        ; command tree -C $argv ; end
 function tmux     ; command tmux -2 $argv ; end
 function tunnel   ; ssh -D 8080 -C -N $argv ; end
 function view     ; nvim -R $argv ; end
+  # Git
+function ga
+  command git add
+end
+
+function gcm --argument msg
+  command git commit -m $msg
+end
+
+function gc
+  command git checkout
+end
+
+function gb
+  command git branch
+end
+
+function gs
+  command git status
+end
+
+function gwc
+  command git whatchanged -p --abbrev-commit --pretty=medium
+end
+
+function gd --argument args
+  command git diff $args
+end
+
+function gundo
+  command git reset --soft HEAD~1
+end
+
+function gclear
+  command git clean -fdx
+end
+
+function gl
+  command git log --graph --pretty=format:"%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset" --abbrev-commit
+end
 
 # Fuzzy find & vim
 function vp
