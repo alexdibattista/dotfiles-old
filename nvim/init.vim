@@ -1,16 +1,20 @@
+let g:python_host_prog = '/Users/alexanderdibattista/.pyenv/versions/neovim2/bin/python'
+let g:python3_host_prog = '/Users/alexanderdibattista/.pyenv/versions/neovim3/bin/python'
+"
+" Syntax highlighting {{{
 set t_Co=256
+set background=dark
+colorscheme onedark
+" }}}
 set encoding=UTF-8
 
-" set spell check
-set nospell
 syntax on
-if exists('+termguicolors')
-  let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
-  let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
-  set termguicolors
-endif
+" if exists('+termguicolors')
+  " let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+  " let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+  " set termguicolors
+" endif
 
-colorscheme onedark
 " autocmd FileType python colorscheme railcasts
 
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
@@ -71,8 +75,6 @@ set winminheight=0 " Allow splits to be reduced to a single line
 
 let g:AutoClosePumvisible = {"ENTER": "<C-Y>", "ESC": "<ESC>"} " autoclose escape key
 
-let g:python_host_prog = '/Users/alexanderdibattista/.pyenv/versions/neovim2/bin/python'
-let g:python3_host_prog = '/Users/alexanderdibattista/.pyenv/versions/neovim3/bin/python'
 let g:python_highlight_all = 1
 
 let g:deoplete#sources#ternjs#tern_bin = '/usr/local/bin/ternjs'
@@ -101,6 +103,7 @@ map <C-\> :NERDTreeToggle<CR>
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 let g:NERDTreeDirArrowExpandable = '▸'
 let g:NERDTreeDirArrowCollapsible = '▾'
+let NERDTreeIgnore = ['^\~$[[dir]]', '^\.o$[[file]]', '^\.pyc$[[file]]', '^\.DS_Store$[[file]]']
 
 " vim ident guides
 let g:indent_guides_auto_colors = 0
@@ -113,7 +116,6 @@ set fcs=fold:-
 nnoremap <silent> <leader>c :set nolist!<CR>
 " }}}
 " ale
-
 let g:ale_completion_enabled = 1
 let g:ale_virtualenv_dir_names = ['venv', '.env', 'env', 've', 'virtualenv', '.pyenv']
 let b:ale_linter_aliases = {'tsx': 'typescript'}
@@ -129,7 +131,9 @@ let g:ale_fixers = {
       \  'css': ['stylelint', 'prettier'],
       \  'python': ['black']}
 
-
+let g:ale_set_loclist = 0
+let g:ale_set_quickfix = 1
+let g:ale_set_highlights = 0
 let g:ale_sign_error = '⇝'
 let g:ale_sign_warning = '⚠'
 let g:ale_lint_on_text_changed = 'never'
@@ -337,23 +341,23 @@ let g:markdown_composer_syntax_theme = 'Sunburst'
 " }}}
 
 " Elixir Tagbar Configuration
-let g:tagbar_type_elixir = {
-    \ 'ctagstype' : 'elixir',
-    \ 'kinds' : [
-        \ 'f:functions',
-        \ 'functions:functions',
-        \ 'c:callbacks',
-        \ 'd:delegates',
-        \ 'e:exceptions',
-        \ 'i:implementations',
-        \ 'a:macros',
-        \ 'o:operators',
-        \ 'm:modules',
-        \ 'p:protocols',
-        \ 'r:records',
-        \ 't:tests'
-    \ ]
-    \ }
+" let g:tagbar_type_elixir = {
+    " \ 'ctagstype' : 'elixir',
+    " \ 'kinds' : [
+        " \ 'f:functions',
+        " \ 'functions:functions',
+        " \ 'c:callbacks',
+        " \ 'd:delegates',
+        " \ 'e:exceptions',
+        " \ 'i:implementations',
+        " \ 'a:macros',
+        " \ 'o:operators',
+        " \ 'm:modules',
+        " \ 'p:protocols',
+        " \ 'r:records',
+        " \ 't:tests'
+    " \ ]
+    " \ }
 
 " jsx-pretty.vim {{{
 augroup jsx_pretty_config
@@ -418,7 +422,19 @@ augroup filetype_json
   au BufRead,BufNewFile *.json set ft=json syntax=javascript
 augroup END
 " }}}
-
+" Set clipboard provider to pbcopy for MacOS
+let g:clipboard = {
+      \ 'name': 'pbcopy',
+      \ 'copy': {
+      \    '+': 'pbcopy',
+      \    '*': 'pbcopy',
+      \  },
+      \ 'paste': {
+      \    '+': 'pbpaste',
+      \    '*': 'pbpaste',
+      \ },
+      \ 'cache_enabled': 0,
+\ }
 call plug#begin('~/.config/nvim/plugged')
   " Utilities
   Plug 'junegunn/rainbow_parentheses.vim'
@@ -430,6 +446,8 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'Shougo/vimproc.vim',     { 'do' : 'make' }
   Plug 'tpope/vim-repeat'
   Plug 'tpope/vim-surround'
+  Plug 'tpope/vim-endwise'
+  Plug 'rstacruz/vim-closer'
   Plug 'godlygeek/tabular'
   Plug 'Townk/vim-autoclose'
   Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
@@ -449,9 +467,6 @@ call plug#begin('~/.config/nvim/plugged')
   " Themes
   Plug 'vim-airline/vim-airline'
   Plug 'ryanoasis/vim-devicons'
-  Plug 'gf3/molotov'
-  Plug 'ajmwagar/vim-deus'
-  Plug 'arcticicestudio/nord-vim'
 
   " Search
   Plug 'junegunn/fzf',           { 'dir': '~/.fzf', 'do': './install --all' }
@@ -465,7 +480,7 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'BjRo/vim-extest'
   Plug 'frost/vim-eh-docs'
   Plug 'slashmili/alchemist.vim'
-  Plug 'tpope/vim-endwise'
+
   Plug 'jadercorrea/elixir_generator.vim'
   Plug 'elixir-editors/vim-elixir'
   Plug 'mhinz/vim-mix-format'
